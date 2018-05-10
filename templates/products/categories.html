@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+       <!-- Title page -->
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url({% static "images/bg-02.jpg" %});">
+		<h2 class="ltext-105 cl13 txt-center">
+			{% if not female %}Men{% else %}Women{% endif %}
+		</h2>
+	</section>
+    <div class="bg0 m-t-23 p-b-140">
+        <div class="container">
+            {% for category in categories %}
+                <h2 class="mtext-111 c12 txt-center"> {{category}} </h2>
+                <br>
+                <div class="row">
+                {% if not female %}
+                    {% for product in category.get_products.only_men %}
+                        <div class="block2">
+                            <div class="block2-pic hov-img0">
+                                <img src="{{ product.image.url }}" alt="IMG-PRODUCT" style="width:300px;height:350px;">
+                                <a href="{{ product.get_absolute_url }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15">
+                                    Quick View
+                                </a>
+                            </div>
+                            <div class="block2-txt flex-w flex-t p-t-14">
+                                <div class="block2-txt-child1 flex-col-l ">
+                                    <a href="{{ product.get_absolute_url }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                        {{ product.title }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                {% endif %}
+                {% if female %}
+                    {% for product in category.get_products.only_women %}
+                        <div class="block2">
+                            <div class="block2-pic hov-img0">
+                                <img src="{{ product.image.url }}" alt="IMG-PRODUCT" style="width:300px;height:350px;">
+                                <a href="{{ product.get_absolute_url }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15">
+                                    Quick View
+                                </a>
+                            </div>
+                            <div class="block2-txt flex-w flex-t p-t-14">
+                                <div class="block2-txt-child1 flex-col-l ">
+                                    <a href="{{ product.get_absolute_url }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                        {{ product.title }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                </div>
+                <br>
+            {% endfor %}
+         </div>
+    </div>
+{% endblock %}

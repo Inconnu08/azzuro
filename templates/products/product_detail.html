@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{%  load static %}
+
+{% block content %}
+
+    	<!-- Product Detail -->
+	<section class="sec-product-detail bg0 p-t-65 p-b-60">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-lg-7 p-b-30">
+					<div class="p-l-25 p-r-30 p-lr-0-lg">
+						<div class="wrap-slick3 flex-sb flex-w">
+							<div class="wrap-slick3-dots"></div>
+							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+
+							<div class="slick3 gallery-lb">
+								<div class="item-slick3" data-thumb="{{ object.image.url }}">
+									<div class="wrap-pic-w pos-relative">
+										<img class="drift-demo-trigger" data-zoom="{{ object.image.url }}" src="{{ object.image.url }}" alt="IMG-PRODUCT">
+									</div>
+								</div>
+
+                                {% if object.image2 %}
+                                    <div class="item-slick3" data-thumb="{{ object.image2.url }}">
+                                        <div class="wrap-pic-w pos-relative">
+                                            <img class="drift-demo-trigger2" data-zoom="{{ object.image2.url }}" src="{{ object.image2.url }}" alt="IMG-PRODUCT">
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if object.image3 %}
+								<div class="item-slick3" data-thumb="{{ object.image3.url }}">
+									<div class="wrap-pic-w pos-relative">
+										<img class="drift-demo-trigger3" data-zoom="{{ object.image3.url }}" src="{{ object.image3.url }}" alt="IMG-PRODUCT">
+									</div>
+								</div>
+                                {% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-lg-5 p-b-30">
+					<div class="p-r-50 p-t-5 p-lr-0-lg">
+                <div class="detail"></div>
+						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
+							{{ object.title }}
+						</h4>
+
+						<p class="stext-102 cl3 p-t-23">
+							{{ object.description }}
+						</p>
+						<!--  -->
+						<div class="p-t-20">
+							<div class="size-203 flex-c-m respon6">
+                                {{ object.categories }}
+							</div>
+                            <p class="stext-102 cl3 p-t-23">To buy, visit our shop.</p>
+							<div class="flex-w flex-r-m p-b-10">
+									<a href="{% url 'contact' %}"><button class="flex-c-m stext-101 cl0 size-101 bg10 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+										Visit
+									</button></a>
+							</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript" src="{% static 'vendor/drift/Drift.min.js' %}"></script>
+    <script type="text/javascript">
+    new Drift(document.querySelector('.drift-demo-trigger'), {
+        paneContainer: document.querySelector('.detail'),
+        inlinePane: 700,
+        inlineOffsetY: -85,
+        zoomFactor: 1.5,
+        containInline: true
+    });
+    new Drift(document.querySelector('.drift-demo-trigger2'), {
+        paneContainer: document.querySelector('.detail'),
+        inlinePane: 700,
+        inlineOffsetY: -85,
+        zoomFactor: 1.5,
+        containInline: true
+    });
+        new Drift(document.querySelector('.drift-demo-trigger3'), {
+        paneContainer: document.querySelector('.detail'),
+        inlinePane: 700,
+        inlineOffsetY: -85,
+        zoomFactor: 1.5,
+        containInline: true
+    });
+    </script>
+{% endblock %}
+
+

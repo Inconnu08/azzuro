@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="bg0 m-t-23 p-b-140">
+        <div class="container infinite-container">
+          <h3>Search result(s) for: {{ query }}</h3>
+            <div class="row">
+                {% for number in object_list %}
+                    <div class="infinite-item"></div>
+                        <div class="block2">
+                            <div class="block2-pic hov-img0">
+                                <img src="{{ number.image.url }}" alt="IMG-PRODUCT" style="width:300px;height:300px;">
+                                <a href="{{ number.get_absolute_url }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15">
+                                    Quick View
+                                </a>
+                            </div>
+                            <div class="block2-txt flex-w flex-t p-t-14">
+                                <div class="block2-txt-child1 flex-col-l ">
+                                    <a href="{{ number.get_absolute_url }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                        {{ number.title }}
+                                    </a>
+                                    <span class="stext-105 cl3">{{ number.categories.title }}</span>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                {% endfor %}
+            </div>
+        <div class="row"><span><br><br><br></span></div>
+        <div class="row pull-right">
+            {% if object_list.has_previous %}
+                <a class="infinite-more-link" href="?page={{ object_list.previous_page_number }}">
+                    <button class="flex-c-m stext-101 cl0 size-101 bg10 bor1 hov-btn2 p-lr-15 trans-04">Previous</button>
+                </a>
+            {% endif %}
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            {% if object_list.has_next %}
+                <a class="infinite-more-link" href="?page={{ object_list.next_page_number }}">
+                    <button class="flex-c-m stext-101 cl0 size-101 bg10 bor1 hov-btn2 p-lr-15 trans-04">Next</button>
+                </a>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+
+  <div class="loading" style="display: none;">
+    Loading...
+  </div>
+
+  <script>
+    const infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function () {
+        $('.loading').show();
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+      }
+    });
+  </script>
+{% endblock %}
