@@ -49,6 +49,47 @@ def categories_f(request):
     return render(request, 'products/categories.html', {'categories': cat, 'female': True})
 
 
+def accessories(request):
+    category_ids = Products.objects.filter(accessories=True).values_list('categories', flat=True)
+    query_Set = models.Category.objects.get_queryset().order_by('id').filter(id__in=category_ids)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(query_Set, 20)
+    try:
+        cat = paginator.page(page)
+    except PageNotAnInteger:
+        cat = paginator.page(1)
+    except EmptyPage:
+        cat = paginator.get_page(paginator.num_pages)
+    return render(request, 'products/selective_product_list.html', {'categories': cat, 'heading': 'Accessories'})
+
+
+def wedding_collection(request):
+    category_ids = Products.objects.filter(wedding_collection=True).values_list('categories', flat=True)
+    query_Set = models.Category.objects.get_queryset().order_by('id').filter(id__in=category_ids)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(query_Set, 20)
+    try:
+        cat = paginator.page(page)
+    except PageNotAnInteger:
+        cat = paginator.page(1)
+    except EmptyPage:
+        cat = paginator.get_page(paginator.num_pages)
+    return render(request, 'products/selective_product_list.html', {'categories': cat, 'heading': 'Wedding Collection', 'x':'only_wedding_collection'})
+
+
+def designer_dress(request):
+    category_ids = Products.objects.filter(designer_dress=True).values_list('categories', flat=True)
+    query_Set = models.Category.objects.get_queryset().order_by('id').filter(id__in=category_ids)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(query_Set, 20)
+    try:
+        cat = paginator.page(page)
+    except PageNotAnInteger:
+        cat = paginator.page(1)
+    except EmptyPage:
+        cat = paginator.get_page(paginator.num_pages)
+    return render(request, 'products/selective_product_list.html', {'categories': cat, 'heading': 'Designer Dresses'})
+
 def product_list(request):
     query_Set = Products.objects.all()
     page = request.GET.get('page', 1)

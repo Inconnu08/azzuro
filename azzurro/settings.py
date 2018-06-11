@@ -25,7 +25,7 @@ SECRET_KEY = '*o6g8&$ir=lv$m^ieue-*gqj%w613nnmyd-#!x=r4nei)-ic*6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost:8081']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost:8081', 'taufiq.pythonanywhere.com']
 
 
 # Application definition
@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     'corsheaders',
     'products',
 ]

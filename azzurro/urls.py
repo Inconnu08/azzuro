@@ -7,6 +7,8 @@ from django.urls import path, include
 
 from azzurro import settings
 
+admin.site.site_header = "Ciano Administration"
+
 urlpatterns = [
     url(r'^', include('core.urls')),
     path('admin/', admin.site.urls),

@@ -50,6 +50,15 @@ class ProductQuerySet(models.query.QuerySet):
     def only_men(self):
         return self.filter(gender="male", active=True)
 
+    def only_accessories(self):
+        return self.filter(accessories=True, active=True)
+
+    def only_designer_dresses(self):
+        return self.filter(designer_dress=True, active=True)
+
+    def only_wedding_collection(self):
+        return self.filter(wedding_collection=True, active=True)
+
     def search(self, query):
         lookups = (Q(title__icontains=query) |
                    Q(description__icontains=query) |
@@ -75,6 +84,15 @@ class ProductManager(models.Manager):
 
     def only_male(self):
         return self.get_queryset().only_men()
+
+    def get_accessories(self):
+        return self.get_queryset().only_accessories()
+
+    def get_wedding_collections(self):
+        return self.get_queryset().only_wedding_collection()
+
+    def get_designer_dresses(self):
+        return self.get_queryset().only_designer_dresses()
 
     def get_by_id(self, _id):
         qs = self.get_queryset().filter(id=_id)  # Product.objects == self.get_queryset()
@@ -125,6 +143,9 @@ class Products(models.Model):
     release_date = models.DateField(default=timezone.now)
     active = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
+    accessories = models.BooleanField(default=False)
+    designer_dress = models.BooleanField(default=False)
+    wedding_collection = models.BooleanField(default=False)
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES, default="male")
 
     objects = ProductManager()
@@ -140,15 +161,4 @@ class Products(models.Model):
 
     class Meta:
         ordering = ['-id']
-
-
-# class Color(models.Model):
-#     name = models.CharField(max_length=225)
-#     hex = models.CharField(max_length=8, blank=True)
-#
-#     def save(self, *args, **kwargs):
-#         self.hex = webcolors.name_to_hex(name=self.name, spec='css3')
-#         return super(Color, self).save()
-#
-#     def __str__(self):
-#         return self.name
+        verbose_name_plural = 'Products'
