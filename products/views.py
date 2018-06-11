@@ -74,7 +74,8 @@ def wedding_collection(request):
         cat = paginator.page(1)
     except EmptyPage:
         cat = paginator.get_page(paginator.num_pages)
-    return render(request, 'products/selective_product_list.html', {'categories': cat, 'heading': 'Wedding Collection', 'x':'only_wedding_collection'})
+    return render(request, 'products/selective_product_list.html',
+                  {'categories': cat, 'heading': 'Wedding Collection', 'x': 'only_wedding_collection'})
 
 
 def designer_dress(request):
@@ -89,6 +90,7 @@ def designer_dress(request):
     except EmptyPage:
         cat = paginator.get_page(paginator.num_pages)
     return render(request, 'products/selective_product_list.html', {'categories': cat, 'heading': 'Designer Dresses'})
+
 
 def product_list(request):
     query_Set = Products.objects.all()

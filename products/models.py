@@ -6,12 +6,12 @@ from django.db.models import Q
 from django.urls import reverse
 from django.utils import timezone
 
-
 GENDER_CHOICES = (
     ("male", "male"),
     ("female", "female"),
     ("not specified", "not specified")
 )
+
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)

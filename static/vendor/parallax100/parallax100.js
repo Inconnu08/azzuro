@@ -5,7 +5,7 @@
         parallax100: function(options) {
             var defaults = {
             	speedScroll: 3
-            }
+            };
  
             var options =  $.extend(defaults, options);
  
@@ -30,7 +30,7 @@
 			        else {
 			            $(bgParallax).css('background-position','center', '0');
 			        }
-			    }
+			    };
 
 			    setPosParallax();
 
